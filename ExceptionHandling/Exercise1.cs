@@ -27,7 +27,7 @@ namespace ExceptionHandling
         /// </summary>
         /// <param name="employeeId">The employee id to validate.</param>
         /// <returns>True if the id is valid; otherwise an exception is thrown.</returns>
-        public bool validateEmployeeId(string employeeId)
+        public bool ValidateEmployeeId(string employeeId)
         {
             // Ensure the provided string has the exact expected length
             int lengthOfString = employeeId.Length;
@@ -64,9 +64,9 @@ namespace ExceptionHandling
             }
 
             // Ensure the last 4 characters are digits
-            string IsNumber = employeeId.Substring(6,4);
+            string isNumber = employeeId.Substring(6,4);
 
-            foreach(char item in IsNumber)
+            foreach(char item in isNumber)
             {
                 if (Char.IsDigit(item))
                 {
@@ -86,7 +86,7 @@ namespace ExceptionHandling
         /// </summary>
         /// <param name="duration">Duration to validate.</param>
         /// <returns>True if duration is within range; otherwise throws <see cref="InvalidEntryException"/>.</returns>
-        public bool validateDuration(int duration)
+        public bool ValidateDuration(int duration)
         {
             if(duration >=1 && duration <= 5)
             {
@@ -129,8 +129,8 @@ namespace ExceptionHandling
             try
             {
                 // Validate employee id and duration using utility methods
-                bool validityId = eu.validateEmployeeId(EmpId);
-                bool durationValidity = eu.validateDuration(duration);
+                bool validityId = eu.ValidateEmployeeId(EmpId);
+                bool durationValidity = eu.ValidateDuration(duration);
 
                 if (validityId && durationValidity)
                 {
