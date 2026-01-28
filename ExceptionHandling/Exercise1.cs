@@ -112,35 +112,40 @@ namespace ExceptionHandling
         /// </summary>
         public static void Main(string[] args)
         {
-            // Prompt for employee id and read user input
-            Console.WriteLine("Enter your Employee Id");
-            string EmpId = Console.ReadLine();
-
-            // Prompt for entry type (not validated in current implementation)
-            Console.WriteLine("Enter Your Entry Type");
-            string EntryType = Console.ReadLine();
-
-            // Prompt for duration and parse as integer
-            Console.WriteLine("Enter Duration");
-            int duration = int.Parse(Console.ReadLine());
-
-            EntryUtility eu = new EntryUtility();
-
-            try
+            Console.WriteLine("Enter The Number of Entries");
+            int numberOfEntries = int.Parse(Console.ReadLine());
+            for(int i = 0; i<numberOfEntries; i++)
             {
-                // Validate employee id and duration using utility methods
-                bool validityId = eu.ValidateEmployeeId(EmpId);
-                bool durationValidity = eu.ValidateDuration(duration);
+                 // Prompt for employee id and read user input
+                Console.WriteLine("Enter your Employee Id");
+                string EmpId = Console.ReadLine();
 
-                if (validityId && durationValidity)
+                // Prompt for entry type (not validated in current implementation)
+                Console.WriteLine("Enter Your Entry Type");
+                string EntryType = Console.ReadLine();
+
+                // Prompt for duration and parse as integer
+                Console.WriteLine("Enter Duration");
+                int duration = int.Parse(Console.ReadLine());
+
+                EntryUtility eu = new EntryUtility();
+
+                try
                 {
-                    Console.WriteLine("Your Entry is Valid");
+                    // Validate employee id and duration using utility methods
+                    bool validityId = eu.ValidateEmployeeId(EmpId);
+                    bool durationValidity = eu.ValidateDuration(duration);
+
+                    if (validityId && durationValidity)
+                    {
+                        Console.WriteLine("Your Entry is Valid");
+                    }
                 }
-            }
-            catch(InvalidEntryException ex)
-            {
-                // Report validation error message to the user
-                Console.WriteLine(ex.Message);
+                catch(InvalidEntryException ex)
+                {
+                    // Report validation error message to the user
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
     }
