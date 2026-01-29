@@ -6,7 +6,7 @@
     <RootNamespace>M1_Practice</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <StartupObject>ExceptionHandling.Program2</StartupObject>
+    <StartupObject>ExceptionHandling.Program3</StartupObject>
   </PropertyGroup>
 
 </Project>
