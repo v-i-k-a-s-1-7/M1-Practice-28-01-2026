@@ -1,0 +1,54 @@
+﻿@model FlightSearchEngine.Models.SearchViewModel
+
+<h2>Flight Search</h2>
+
+<form asp-action="SearchFlights" method="post">
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label>Source</label>
+        @Html.DropDownListFor(
+        m => m.Source,
+                Model.SourceList,
+                        "-- Select Source --",
+                new { @class = "form-control" }
+                )
+        @Html.ValidationMessageFor(m => m.Source)
+    </div>
+
+    <div>
+        <label>Destination</label>
+        @Html.DropDownListFor(
+                m => m.Destination,
+                Model.DestinationList,
+                        "-- Select Destination --",
+                new { @class = "form-control" }
+                )
+        @Html.ValidationMessageFor(m => m.Destination)
+    </div>
+
+    <div>
+        <label>Number of Persons</label>
+        @Html.TextBoxFor(
+                m => m.NumberOfPersons,
+                new { type = "number", min = "1", max = "10", @class = "form-control" }
+                )
+        @Html.ValidationMessageFor(m => m.NumberOfPersons)
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">
+        Search Flights Only
+    </button>
+
+    <button type="submit"
+            formaction="/Flight/SearchFlightsWithHotels"
+            class="btn btn-warning">
+        Search Flight + Hotel
+    </button>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

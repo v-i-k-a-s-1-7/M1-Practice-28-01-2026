@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced C# OA – Dark Mode</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #0b1120;
+    color: #e5e7eb;
+    font-family: Consolas, Arial, sans-serif;
+}
+
+header {
+    background: #020617;
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    color: #38bdf8;
+    border-bottom: 1px solid #1e293b;
+}
+
+.timer {
+    text-align: center;
+    font-size: 18px;
+    color: #a5b4fc;
+    margin-top: 10px;
+}
+
+.container {
+    width: 92%;
+    margin: 25px auto;
+}
+
+.question {
+    background: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #38bdf8;
+    margin-top: 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+.medium { background: #0ea5e9; }
+.hard { background: #ef4444; }
+
+pre {
+    background: #020617;
+    border: 1px solid #334155;
+    padding: 15px;
+    border-radius: 6px;
+    overflow-x: auto;
+    user-select: text;
+    margin-top: 10px;
+}
+
+button {
+    background: #1e293b;
+    color: #38bdf8;
+    border: 1px solid #334155;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 8px 5px 0 0;
+}
+
+button:hover {
+    background: #334155;
+}
+
+.section {
+    display: none;
+    background: #020617;
+    border-left: 4px solid #38bdf8;
+    padding: 12px;
+    margin-top: 10px;
+    color: #cbd5f5;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.copy-btn {
+    float: right;
+    font-size: 12px;
+}
+</style>
+
+<script>
+let seconds = 0;
+setInterval(() => {
+    seconds++;
+    let m = Math.floor(seconds / 60);
+    let s = seconds % 60;
+    document.getElementById("timer").innerText =
+        `Time: ${m}:${s.toString().padStart(2,'0')}`;
+}, 1000);
+
+function toggle(id) {
+    let el = document.getElementById(id);
+    el.style.display = el.style.display === "block" ? "none" : "block";
+}
+
+function copyCode(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+    alert("Code copied!");
+}
+</script>
+</head>
+
+<body>
+
+<header>
+Advanced C# Online Assessment – Dark Mode
+<div class="timer" id="timer">Time: 0:00</div>
+</header>
+
+<div class="container">
+
+<!-- Q1 -->
+<div class="question">
+<h2>Q1. Smart Inventory Manager <span class="badge medium">Medium</span></h2>
+<p>Filter products with stock below 10, sort them ascending, and print name & stock.</p>
+
+<button onclick="toggle('h1')">Hint</button>
+<div id="h1" class="section">Use LINQ: Where → OrderBy</div>
+
+<button onclick="toggle('s1')">Solution</button>
+<div id="s1" class="section">
+Use <code>Where(p => p.Stock &lt; 10).OrderBy(p => p.Stock)</code>
+</div>
+
+<button class="copy-btn" onclick="copyCode('c1')">Copy</button>
+<pre id="c1">
+List&lt;Product&gt; products = new List&lt;Product&gt;
+{
+    new Product { Name="Laptop", Stock=5 },
+    new Product { Name="Mouse", Stock=20 },
+    new Product { Name="Keyboard", Stock=8 }
+};
+
+// TODO
+</pre>
+</div>
+
+<!-- Q2 -->
+<div class="question">
+<h2>Q2. Generic Cache System <span class="badge medium">Medium</span></h2>
+<p>Create a generic cache with Add, GetAll, GetCount.</p>
+
+<button onclick="toggle('h2')">Hint</button>
+<div id="h2" class="section">Use List&lt;T&gt; internally</div>
+
+<button onclick="toggle('s2')">Solution</button>
+<div id="s2" class="section">
+Generic class with List&lt;T&gt; and Count property.
+</div>
+
+<button class="copy-btn" onclick="copyCode('c2')">Copy</button>
+<pre id="c2">
+public class Cache&lt;T&gt;
+{
+    // TODO
+}
+</pre>
+</div>
+
+<!-- Q3 -->
+<div class="question">
+<h2>Q3. Employee Bonus Calculator <span class="badge hard">Hard</span></h2>
+<p>Demonstrate runtime polymorphism using inheritance.</p>
+
+<button onclick="toggle('h3')">Hint</button>
+<div id="h3" class="section">Override abstract method</div>
+
+<button onclick="toggle('s3')">Solution</button>
+<div id="s3" class="section">
+Permanent → higher bonus, Contract → lower bonus
+</div>
+
+<pre>
+abstract class Employee {
+    public abstract double CalculateBonus();
+}
+</pre>
+</div>
+
+<!-- Q4 -->
+<div class="question">
+<h2>Q4. Password Strength Checker <span class="badge medium">Medium</span></h2>
+<p>Password must have uppercase, digit, and length ≥ 8.</p>
+
+<button onclick="toggle('h4')">Hint</button>
+<div id="h4" class="section">Loop chars → char.IsUpper / IsDigit</div>
+
+<pre>
+string password = Console.ReadLine();
+</pre>
+</div>
+
+<!-- Q5 -->
+<div class="question">
+<h2>Q5. Order Processing Exception Flow <span class="badge medium">Medium</span></h2>
+<p>Throw custom exceptions based on order quantity.</p>
+
+<button onclick="toggle('h5')">Hint</button>
+<div id="h5" class="section">Create custom Exception classes</div>
+
+<pre>
+if (qty &lt;= 0) throw new InvalidOrderException();
+</pre>
+</div>
+
+<!-- Q6 -->
+<div class="question">
+<h2>Q6. Department Salary Dashboard <span class="badge hard">Hard</span></h2>
+<p>Group employees and calculate Total, Avg, Max salary.</p>
+
+<button onclick="toggle('h6')">Hint</button>
+<div id="h6" class="section">GroupBy → Sum / Average / Max</div>
+
+<pre>
+employees.GroupBy(e => e.Department)
+</pre>
+</div>
+
+<!-- Q7 -->
+<div class="question">
+<h2>Q7. Log Analyzer <span class="badge medium">Medium</span></h2>
+<p>Count ERROR logs and print messages.</p>
+
+<button onclick="toggle('h7')">Hint</button>
+<div id="h7" class="section">StartsWith("ERROR")</div>
+</div>
+
+<!-- Q8 -->
+<div class="question">
+<h2>Q8. Delegate Notification System <span class="badge hard">Hard</span></h2>
+<p>Use multicast delegates.</p>
+
+<button onclick="toggle('h8')">Hint</button>
+<div id="h8" class="section">Delegate += Method</div>
+
+<pre>
+Notify notify = SendEmail;
+notify += SendSMS;
+</pre>
+</div>
+
+<!-- Q9 -->
+<div class="question">
+<h2>Q9. Generic Repository with Filter <span class="badge hard">Hard</span></h2>
+<p>Use Func&lt;T,bool&gt; for filtering.</p>
+
+<button onclick="toggle('h9')">Hint</button>
+<div id="h9" class="section">LINQ Where(predicate)</div>
+</div>
+
+<!-- Q10 -->
+<div class="question">
+<h2>Q10. Data Sanitizer Pipeline <span class="badge hard">Hard</span></h2>
+<p>Chain string processors using delegates.</p>
+
+<button onclick="toggle('h10')">Hint</button>
+<div id="h10" class="section">Trim → Lower → Remove special chars</div>
+</div>
+
+</div>
+
+<footer>
+Advanced C# OA Practice • Dark Mode • No Dependencies • Interview Ready
+</footer>
+
+</body>
+</html>
